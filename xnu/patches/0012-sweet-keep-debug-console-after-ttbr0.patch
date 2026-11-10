@@ -40,7 +40,7 @@ diff --git a/osfmk/arm64/arm_vm_init.c b/osfmk/arm64/arm_vm_init.c
  
 +#if defined(SWEET)
 +	/* phystokv() must still refer to the bootstrap aperture here. */
-+	sweet_early_map_final();
++	if (0) sweet_early_map_final();
 +#endif
  	arm_vm_physmap_init(args);
  	set_mmu_ttb_alternate(cpu_ttep & TTBR_BADDR_MASK);
@@ -51,7 +51,7 @@ diff --git a/osfmk/arm64/arm_vm_init.c b/osfmk/arm64/arm_vm_init.c
 -	sweet_early_disable();
 +#if defined(SWEET)
 +	/* The final TTBR1 is live; leave the outgoing VA=PA framebuffer alias. */
-+	sweet_early_relocate(SWEET_EARLY_FB_VA);
++	sweet_early_disable();
 +#endif
  	set_mmu_ttb(invalid_ttep & TTBR_BADDR_MASK);
  
